@@ -116,7 +116,7 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenTwoCylindrical(CylindricalCollid
 	return offset;
 }
 
-XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndSphere(CubicCollider * c1, SphereCollider * c2)
+XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndSphere(CubicCollider * c1, SphericalCollider * c2)
 {
 	XMFLOAT3 offset(0.f, 0.f, 0.f);
 	XMVECTOR cubeLocalPosition = XMLoadFloat3(&(c1->position));
@@ -377,7 +377,7 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndSphere(CubicCollider * c
 	return offset;
 }
 
-XMFLOAT3 CollisionDetection::isOverlappedBetweenCylindricalAndSphere(CylindricalCollider * c1, SphereCollider * c2)
+XMFLOAT3 CollisionDetection::isOverlappedBetweenCylindricalAndSphere(CylindricalCollider * c1, SphericalCollider * c2)
 {
 	XMFLOAT3 offset(0.f, 0.f, 0.f);
 	XMVECTOR cylinderLocalPosition = XMLoadFloat3(&(c1->position));

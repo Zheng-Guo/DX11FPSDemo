@@ -93,6 +93,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;d3dx11d.lib;dxgi.lib;d3dcompiler.lib;dxguid.lib;dinput8.lib;D2d1.lib;Dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,6 +147,95 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AIController.h" />
+    <ClInclude Include="AIManager.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Clock.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubicCollider.h" />
+    <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="CylindricalCollider.h" />
+    <ClInclude Include="DX11FPSDemo.h" />
+    <ClInclude Include="EmittingParticleSystem.h" />
+    <ClInclude Include="EnemyCharacter.h" />
+    <ClInclude Include="EnemyCharacterManager.h" />
+    <ClInclude Include="ExplosionParticleSystem.h" />
+    <ClInclude Include="Fireball.h" />
+    <ClInclude Include="FirstPersonCharacter.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="FreeLookCamera.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GeometryManager.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MaterialManager.h" />
+    <ClInclude Include="NavigationManager.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleSystemManager.h" />
+    <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="ProgressBar.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectileManager.h" />
+    <ClInclude Include="Rect.h" />
+    <ClInclude Include="RenderingWindow.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphericalCollider.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="WallBlock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AIController.cpp" />
+    <ClCompile Include="AIManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubicCollider.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="CylindricalCollider.cpp" />
+    <ClCompile Include="DX11FPSDemo.cpp" />
+    <ClCompile Include="EmittingParticleSystem.cpp" />
+    <ClCompile Include="EnemyCharacter.cpp" />
+    <ClCompile Include="EnemyCharacterManager.cpp" />
+    <ClCompile Include="ExplosionParticleSystem.cpp" />
+    <ClCompile Include="Fireball.cpp" />
+    <ClCompile Include="FirstPersonCharacter.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="FreeLookCamera.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GeometryManager.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="NavigationManager.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleSystemManager.cpp" />
+    <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectileManager.cpp" />
+    <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="RenderingWindow.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphericalCollider.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="WallBlock.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

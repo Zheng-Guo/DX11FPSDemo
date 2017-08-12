@@ -1,6 +1,6 @@
 #pragma once
 #include "UIComponent.h"
-#include "Rectangle.h"
+#include "Rect.h"
 
 class ProgressBar :public UIComponent
 {

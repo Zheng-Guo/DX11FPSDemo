@@ -3,7 +3,7 @@
 #include "CollisionDetection.h"
 #include "ExplosionParticleSystem.h"
 
-DX11Application::DX11Application(int w, int h, HINSTANCE hi, int sc, LPCWSTR title) :width(w),
+DX11FPSDemo::DX11FPSDemo(int w, int h, HINSTANCE hi, int sc, LPCWSTR title) :width(w),
 height(h),
 instanceHandle(hi),
 showCmd(sc),
@@ -19,7 +19,7 @@ quitGame(false)
 
 }
 
-DX11Application::~DX11Application()
+DX11FPSDemo::~DX11FPSDemo()
 {
 	delete skyBox;
 	delete materialManager;
@@ -39,7 +39,7 @@ DX11Application::~DX11Application()
 	UnregisterClass(L"DX11ApplicationClass", wc.hInstance);
 }
 
-bool DX11Application::initWindow()
+bool DX11FPSDemo::initWindow()
 {
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = WndProc;
@@ -151,7 +151,7 @@ bool DX11Application::initWindow()
 	return true;
 }
 
-bool DX11Application::initRendering()
+bool DX11FPSDemo::initRendering()
 {
 	MaterialManager::setDevice(device);
 	materialManager = MaterialManager::getInstance();
@@ -211,7 +211,7 @@ bool DX11Application::initRendering()
 	return true;
 }
 
-int DX11Application::run()
+int DX11FPSDemo::run()
 {
 	MSG msg = { 0 };
 	clock.startClock();
@@ -254,7 +254,7 @@ int DX11Application::run()
 	return (int)msg.wParam;
 }
 
-void DX11Application::reset()
+void DX11FPSDemo::reset()
 {
 	aiManager->reset();
 	enemyCharacterManager->reset();
@@ -267,7 +267,7 @@ void DX11Application::reset()
 	playerCharacter->resetOrientation();
 }
 
-void DX11Application::processInput()
+void DX11FPSDemo::processInput()
 {
 	DIMOUSESTATE mouseCurrState;
 
@@ -320,7 +320,7 @@ void DX11Application::processInput()
 	}
 }
 
-void DX11Application::update(float deltaTime)
+void DX11FPSDemo::update(float deltaTime)
 {
 	playerCharacter->update(deltaTime);
 	projectileManager->update(deltaTime);
@@ -389,7 +389,7 @@ void DX11Application::update(float deltaTime)
 
 	for (auto f = projectileManager->getListBegin(); f != projectileManager->getListEnd(); ++f)
 	{
-		SphereCollider *sphereCollider = (SphereCollider*)((*f)->getCollider());
+		SphericalCollider *sphereCollider = (SphericalCollider*)((*f)->getCollider());
 		int numberofWallBlock = currentLevel->getWallBlockListEnd() - currentLevel->getWallBlockListBegin();
 		XMFLOAT3 *pOffsets = new XMFLOAT3[numberofWallBlock];
 		for (auto w = currentLevel->getWallBlockListBegin(); w != currentLevel->getWallBlockListEnd(); ++w)
@@ -423,7 +423,7 @@ void DX11Application::update(float deltaTime)
 
 	for (auto f = projectileManager->getListBegin(); f != projectileManager->getListEnd(); ++f)
 	{
-		SphereCollider *sphereCollider = (SphereCollider*)((*f)->getCollider());
+		SphericalCollider *sphereCollider = (SphericalCollider*)((*f)->getCollider());
 		int numberOfFloor = currentLevel->getFloorListEnd() - currentLevel->getFloorListBegin();
 		XMFLOAT3 *pOffsets = new XMFLOAT3[numberOfFloor];
 		for (auto fl = currentLevel->getFloorListBegin(); fl != currentLevel->getFloorListEnd(); ++fl)
@@ -457,7 +457,7 @@ void DX11Application::update(float deltaTime)
 
 	for (auto f = projectileManager->getListBegin(); f != projectileManager->getListEnd(); ++f)
 	{
-		SphereCollider *sphereCollider = (SphereCollider*)((*f)->getCollider());
+		SphericalCollider *sphereCollider = (SphericalCollider*)((*f)->getCollider());
 
 		for (auto enemyCharacter = enemyCharacterManager->getListBegin(); enemyCharacter != enemyCharacterManager->getListEnd(); ++enemyCharacter)
 		{
@@ -522,7 +522,7 @@ void DX11Application::update(float deltaTime)
 	skyBox->setPosition(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 }
 
-LRESULT DX11Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT DX11FPSDemo::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{

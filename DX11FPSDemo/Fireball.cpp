@@ -8,7 +8,7 @@ radius(r)
 	Sphere *s = new Sphere(d);
 	s->setScale(r, r, r);
 	GameObject::addShape(s);
-	GameObject::setCollider(new SphereCollider(r));
+	GameObject::setCollider(new SphericalCollider(r));
 }
 
 void Fireball::setMaterial(Material * m)

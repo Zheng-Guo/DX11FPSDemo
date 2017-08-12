@@ -11,9 +11,7 @@ angularSpeed(3.14f),
 isMovingForward(false),
 isMovingBackward(false),
 isMovingLeftward(false),
-isMovingRightward(false),
-isRotatingLeft(false),
-isRotatingRight(false)
+isMovingRightward(false)
 {
 }
 

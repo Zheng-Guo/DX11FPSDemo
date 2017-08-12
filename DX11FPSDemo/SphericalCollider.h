@@ -3,12 +3,12 @@
 
 class CollisionDetection;
 
-class SphereCollider :public Collider
+class SphericalCollider :public Collider
 {
 protected:
 	float radius;
 	friend class CollisionDetection;
 public:
-	SphereCollider(float r);
+	SphericalCollider(float r);
 	void setRadius(float r) { radius = r; }
 };

@@ -18,7 +18,7 @@
 #include "ProgressBar.h"
 #include "EnemyCharacterManager.h"
 
-class DX11Application
+class DX11FPSDemo
 {
 private:
 	int width, height;
@@ -64,8 +64,8 @@ private:
 	void update(float deltaTime);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 public:
-	DX11Application(int w = 100, int h = 100, HINSTANCE hi = nullptr, int sc = 0, LPCWSTR title = L"RenderingWindow");
-	~DX11Application();
+	DX11FPSDemo(int w = 100, int h = 100, HINSTANCE hi = nullptr, int sc = 0, LPCWSTR title = L"RenderingWindow");
+	~DX11FPSDemo();
 	void setWndProc(WNDPROC w) { wndProcFunc = w; }
 	bool initWindow();
 	bool initRendering();
