@@ -40,7 +40,7 @@ void FirstPersonCharacter::rotateSight(float x, float y)
 
 void FirstPersonCharacter::move(XMFLOAT3 offset)
 {
-	Character::move(offset);
+	Character::move(offset); 
 	camera.setPosition(position.x + currentCameraOffset.x, position.y + currentCameraOffset.y, position.z + currentCameraOffset.z);
 }
 

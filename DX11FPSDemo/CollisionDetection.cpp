@@ -33,7 +33,7 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 			{
 				offset = XMFLOAT3(0.f, 0.f, -zOffset);
 			}
-			else
+			else if(c2->velocity.z<0)
 			{
 				offset = XMFLOAT3(0.f, 0.f, zOffset);
 			}
@@ -50,7 +50,7 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 			{
 				offset = XMFLOAT3(-xOffset, 0.f, 0.f);
 			}
-			else
+			else if(c2->velocity.x<0)
 			{
 				offset = XMFLOAT3(xOffset, 0.f, 0.f);
 			}
@@ -60,35 +60,123 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 	}
 	if ((cylinderCenter.x - x1)*(cylinderCenter.x - x1) + (cylinderCenter.z - z1)*(cylinderCenter.z - z1) < (c2->radius*c2->radius))
 	{
-		XMFLOAT3 newPos(-c1->halfWidth - c2->radius*cos(0.79f), 0, -c1->halfThickness - c2->radius*cos(0.79f));
-		XMFLOAT3 oldPos(c2->position.x, 0, c2->position.z);
-		XMVECTOR np = XMLoadFloat3(&newPos), op = XMLoadFloat3(&oldPos);
-		XMVECTOR shift = np - op;
-		XMStoreFloat3(&offset, shift);
+		if(c2->velocity.x>0&&c2->velocity.z>0)
+		{
+			float a = (c2->velocity.x*c2->velocity.x) + (c2->velocity.z*c2->velocity.z);
+			float b = 2.f*(c2->velocity.x*(x1 - cylinderCenter.x) + c2->velocity.z*(z1 - cylinderCenter.z));
+			float c = (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x) + (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z) - c2->radius*c2->radius;
+			float determinant = b*b - 4 * a*c;
+			if (determinant < 0.f)
+				determinant = 0.f;
+			float solution1 = (-b + sqrt(determinant)) / 2.f / a, solution2 = (-b - sqrt(determinant)) / 2.f / a;
+			float solution;
+			if (solution1 <= 0)
+				solution = solution2;
+			else
+				solution = solution1;
+			XMVECTOR shift =XMVectorSet(c2->velocity.x, 0.f, c2->velocity.z, 0.f)*-solution;
+			XMStoreFloat3(&offset, shift);
+		}
+		else if(c2->velocity.x>0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z));
+			offset = XMFLOAT3(-shift, 0.f, 0.f);
+		}
+		else if(c2->velocity.z>0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x));
+			offset = XMFLOAT3(0.f, 0.f, -shift);
+		}
 	}
 	if ((cylinderCenter.x - x1)*(cylinderCenter.x - x1) + (cylinderCenter.z - z2)*(cylinderCenter.z - z2) < (c2->radius*c2->radius))
 	{
-		XMFLOAT3 newPos(-c1->halfWidth - c2->radius*cos(0.79f), 0, c1->halfThickness + c2->radius*cos(0.79f));
-		XMFLOAT3 oldPos(c2->position.x, 0, c2->position.z);
-		XMVECTOR np = XMLoadFloat3(&newPos), op = XMLoadFloat3(&oldPos);
-		XMVECTOR shift = np - op;
-		XMStoreFloat3(&offset, shift);
+		if (c2->velocity.x>0 && c2->velocity.z<0)
+		{
+			float a = (c2->velocity.x*c2->velocity.x) + (c2->velocity.z*c2->velocity.z);
+			float b = 2.f*(c2->velocity.x*(x1 - cylinderCenter.x) + c2->velocity.z*(z2 - cylinderCenter.z));
+			float c = (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x) + (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z) - c2->radius*c2->radius;
+			float determinant = b*b - 4 * a*c;
+			if (determinant < 0.f)
+				determinant = 0.f;
+			float solution1 = (-b + sqrt(determinant)) / 2.f / a, solution2 = (-b - sqrt(determinant)) / 2.f / a;
+			float solution;
+			if (solution1 <= 0)
+				solution = solution2;
+			else
+				solution = solution1;
+			XMVECTOR shift = XMVectorSet(c2->velocity.x, 0.f, c2->velocity.z, 0.f)*-solution;
+			XMStoreFloat3(&offset, shift);
+		}
+		else if (c2->velocity.x>0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z));
+			offset = XMFLOAT3(-shift, 0.f, 0.f);
+		}
+		else if (c2->velocity.z<0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x));
+			offset = XMFLOAT3(0.f, 0.f, shift);
+		}
 	}
 	if ((cylinderCenter.x - x2)*(cylinderCenter.x - x2) + (cylinderCenter.z - z1)*(cylinderCenter.z - z1) < (c2->radius*c2->radius))
 	{
-		XMFLOAT3 newPos(c1->halfWidth + c2->radius*cos(0.79f), 0, -c1->halfThickness - c2->radius*cos(0.79f));
-		XMFLOAT3 oldPos(c2->position.x, 0, c2->position.z);
-		XMVECTOR np = XMLoadFloat3(&newPos), op = XMLoadFloat3(&oldPos);
-		XMVECTOR shift = np - op;
-		XMStoreFloat3(&offset, shift);
+		if (c2->velocity.x<0 && c2->velocity.z>0)
+		{
+			float a = (c2->velocity.x*c2->velocity.x) + (c2->velocity.z*c2->velocity.z);
+			float b = 2.f*(c2->velocity.x*(x2 - cylinderCenter.x) + c2->velocity.z*(z1 - cylinderCenter.z));
+			float c = (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x) + (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z) - c2->radius*c2->radius;
+			float determinant = b*b - 4 * a*c;
+			if (determinant < 0.f)
+				determinant = 0.f;
+			float solution1 = (-b + sqrt(determinant)) / 2.f / a, solution2 = (-b - sqrt(determinant)) / 2.f / a;
+			float solution;
+			if (solution1 <= 0)
+				solution = solution2;
+			else
+				solution = solution1;
+			XMVECTOR shift = XMVectorSet(c2->velocity.x, 0.f, c2->velocity.z, 0.f)*-solution;
+			XMStoreFloat3(&offset, shift);
+		}
+		else if (c2->velocity.x<0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z));
+			offset = XMFLOAT3(shift, 0.f, 0.f);
+		}
+		else if (c2->velocity.z>0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x));
+			offset = XMFLOAT3(0.f, 0.f, -shift);
+		}
 	}
 	if ((cylinderCenter.x - x2)*(cylinderCenter.x - x2) + (cylinderCenter.z - z2)*(cylinderCenter.z - z2) < (c2->radius*c2->radius))
 	{
-		XMFLOAT3 newPos(c1->halfWidth + c2->radius*cos(0.79f), 0, +c1->halfThickness + c2->radius*cos(0.79f));
-		XMFLOAT3 oldPos(c2->position.x, 0, c2->position.z);
-		XMVECTOR np = XMLoadFloat3(&newPos), op = XMLoadFloat3(&oldPos);
-		XMVECTOR shift = np - op;
-		XMStoreFloat3(&offset, shift);
+		if (c2->velocity.x<0 && c2->velocity.z<0)
+		{
+			float a = (c2->velocity.x*c2->velocity.x) + (c2->velocity.z*c2->velocity.z);
+			float b = 2.f*(c2->velocity.x*(x2 - cylinderCenter.x) + c2->velocity.z*(z2 - cylinderCenter.z));
+			float c = (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x) + (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z) - c2->radius*c2->radius;
+			float determinant = b*b - 4 * a*c;
+			if (determinant < 0.f)
+				determinant = 0.f;
+			float solution1 = (-b + sqrt(determinant)) / 2.f / a, solution2 = (-b - sqrt(determinant)) / 2.f / a;
+			float solution;
+			if (solution1 <= 0)
+				solution = solution2;
+			else
+				solution = solution1;
+			XMVECTOR shift = XMVectorSet(c2->velocity.x, 0.f, c2->velocity.z, 0.f)*-solution;
+			XMStoreFloat3(&offset, shift);
+		}
+		else if (c2->velocity.x<0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z));
+			offset = XMFLOAT3(shift, 0.f, 0.f);
+		}
+		else if (c2->velocity.z<0)
+		{
+			float shift = sqrt(c2->radius*c2->radius - (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x));
+			offset = XMFLOAT3(0.f, 0.f, shift);
+		}
 	}
 	return offset;
 }

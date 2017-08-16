@@ -3,6 +3,7 @@
 #include "Cylinder.h"
 #include "Cube.h"
 
+
 PlayerCharacter::PlayerCharacter(ID3D11Device * d) :FirstPersonCharacter(d),
 life(100.f),
 totalLife(100.f),

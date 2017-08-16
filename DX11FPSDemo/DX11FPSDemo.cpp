@@ -62,8 +62,8 @@ bool DX11FPSDemo::initWindow()
 		L"DX11ApplicationClass",
 		windowTitle,
 		WS_OVERLAPPEDWINDOW,
-		100,
-		100,
+		0,
+		0,
 		width,
 		height,
 		nullptr,
@@ -97,56 +97,6 @@ bool DX11FPSDemo::initWindow()
 	}
 	window->initRendering();
 	device = window->getDevice();
-
-	D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
-	RECT rc;
-	GetClientRect(windowHandle, &rc);
-
-	D2D1_SIZE_U size = D2D1::SizeU(rc.right - rc.left, rc.bottom - rc.top);
-
-	// Create a Direct2D render target.
-	m_pDirect2dFactory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(), D2D1::HwndRenderTargetProperties(windowHandle, size), &m_pRenderTarget);
-
-	static const WCHAR msc_fontName[] = L"Verdana";
-	static const FLOAT msc_fontSize = 50;
-	HRESULT hr;
-
-	// Create a Direct2D factory.
-	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pD2DFactory);
-
-	if (SUCCEEDED(hr))
-	{
-
-		// Create a DirectWrite factory.
-		hr = DWriteCreateFactory(
-			DWRITE_FACTORY_TYPE_SHARED,
-			__uuidof(m_pDWriteFactory),
-			reinterpret_cast<IUnknown **>(&m_pDWriteFactory)
-		);
-	}
-	if (SUCCEEDED(hr))
-	{
-		// Create a DirectWrite text format object.
-		hr = m_pDWriteFactory->CreateTextFormat(
-			msc_fontName,
-			NULL,
-			DWRITE_FONT_WEIGHT_NORMAL,
-			DWRITE_FONT_STYLE_NORMAL,
-			DWRITE_FONT_STRETCH_NORMAL,
-			msc_fontSize,
-			L"", //locale
-			&m_pTextFormat
-		);
-	}
-	if (SUCCEEDED(hr))
-	{
-		// Center the text horizontally and vertically.
-		m_pTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-
-		m_pTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	}
-
-	m_pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black), &m_pBlackBrush);
 
 	return true;
 }
@@ -184,7 +134,7 @@ bool DX11FPSDemo::initRendering()
 
 	playerCharacter = new PlayerCharacter(device);
 	playerCharacter->setMaterial(materialManager->getSteel());
-	playerCharacter->setPosition(26.f, 1.f, 26.f);
+	playerCharacter->setPosition(25.f, 1.f, 26.f);
 	playerCharacter->setLinearSpeed(15.f);
 	playerCharacter->setProjectileOffset(XMFLOAT3(0.f, -0.3f, 0.5f));
 	playerCharacter->setFireballSpeed(20.f);
@@ -261,7 +211,7 @@ void DX11FPSDemo::reset()
 	projectileManager->reset();
 	particleSystemManager->reset();
 
-	playerCharacter->setPosition(26.f, 1.f, 26.f);
+	playerCharacter->setPosition(25.f, 1.f, 26.f);
 	playerCharacter->setLife(100.f);
 	playerCharacter->setMana(100.f);
 	playerCharacter->resetOrientation();
@@ -344,7 +294,6 @@ void DX11FPSDemo::update(float deltaTime)
 			return;
 		}
 	}
-
 
 	CylindricalCollider *c = (CylindricalCollider*)(playerCharacter->getCollider());
 
@@ -499,19 +448,6 @@ void DX11FPSDemo::update(float deltaTime)
 			{
 				auto ec = enemyCharacterManager->getListBegin();
 				(*(ec + collidedEnemyIndex))->takeDamage((*f)->getDamage());
-				deviceContextHandle = GetDC(windowHandle);
-				HFONT hFont = CreateFont(30, 0, 0, 0, 0, 0, 0, 0, GB2312_CHARSET, 0, 0, 0, 0, L"Î¢ÈíÑÅºÚ");
-				SelectObject(deviceContextHandle, hFont);
-				SetBkMode(deviceContextHandle, TRANSPARENT);
-				wstringstream wss;
-				wss << L"Kill Count: " << killCount;
-				wchar_t text[] = L"Kill count:";
-				SetTextColor(deviceContextHandle, RGB(255, 0, 0));
-				//TextOut(deviceContextHandle, 600, 100, wss.str().c_str(), wss.str().size());
-				TextOut(deviceContextHandle, 600, 100, text, wcslen(text));
-				DeleteObject(hFont);
-				ReleaseDC(windowHandle, deviceContextHandle);
-				PostMessage(windowHandle, WM_PAINT, 0, 0);
 			}
 		}
 	}

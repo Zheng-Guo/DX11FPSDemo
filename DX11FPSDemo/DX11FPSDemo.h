@@ -1,7 +1,5 @@
 #pragma once
 #include <windows.h>
-#include <D2D1.h>
-#include <DWrite.h>
 #include <d3d11.h>
 #include <dinput.h>
 #include <xnamath.h>
@@ -29,12 +27,6 @@ private:
 	HWND windowHandle;
 	WNDCLASS wc;
 	WNDPROC wndProcFunc;
-	ID2D1Factory* m_pDirect2dFactory;
-	ID2D1HwndRenderTarget* m_pRenderTarget;
-	ID2D1Factory* m_pD2DFactory;
-	IDWriteFactory* m_pDWriteFactory;
-	IDWriteTextFormat* m_pTextFormat;
-	ID2D1SolidColorBrush* m_pBlackBrush;
 	RenderingWindow *window;
 	ID3D11Device *device;
 	IDirectInputDevice8* DIKeyboard;
