@@ -15,7 +15,7 @@ fireballManaCost(20.f),
 projectileOffset(XMFLOAT3(0.f, 0.f, 0.f)),
 fire(false)
 {
-	setCameraOffset(0.f, 1.8f, 1.f);
+	setCameraOffset(0.f, 1.8f, 0.5f);
 
 	Sphere *head = new Sphere(d);
 	head->setScale(0.4f, 0.4f, 0.4f);

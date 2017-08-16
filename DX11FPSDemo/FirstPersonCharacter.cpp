@@ -31,7 +31,7 @@ void FirstPersonCharacter::rotateSight(float x, float y)
 		cameraPitch = cameraPitchUpperLimit;
 	if (cameraPitch < cameraPitchLowerLimit)
 		cameraPitch = cameraPitchLowerLimit;
-	XMMATRIX camRotation = XMMatrixRotationRollPitchYaw(cameraPitch, yaw, 0);
+	XMMATRIX camRotation = XMMatrixRotationRollPitchYaw(0, yaw, 0);
 	XMVECTOR newCameraOffset = XMVector3TransformCoord(XMLoadFloat3(&cameraOffset), camRotation);
 	XMStoreFloat3(&currentCameraOffset, newCameraOffset);
 	camera.setPitch(cameraPitch);
