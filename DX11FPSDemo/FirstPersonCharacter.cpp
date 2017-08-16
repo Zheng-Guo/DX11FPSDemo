@@ -38,6 +38,12 @@ void FirstPersonCharacter::rotateSight(float x, float y)
 	camera.setYaw(yaw);
 }
 
+void FirstPersonCharacter::move(XMFLOAT3 offset)
+{
+	Character::move(offset);
+	camera.setPosition(position.x + currentCameraOffset.x, position.y + currentCameraOffset.y, position.z + currentCameraOffset.z);
+}
+
 void FirstPersonCharacter::update(float deltaTime)
 {
 	Character::update(deltaTime);

@@ -14,6 +14,7 @@ public:
 	virtual ~FirstPersonCharacter();
 	void setCameraOffset(float x, float y, float z);
 	void rotateSight(float x, float y);
+	virtual void move(XMFLOAT3 offset) override;
 	virtual void update(float deltaTime) override;
 	XMMATRIX getCamViewMatrix() { return camera.getCamViewMatrix(); }
 	XMMATRIX getCamProjectionMatrix() const { return camera.getCamProjectionMatrix(); }

@@ -53,6 +53,11 @@ void Character::rotate(float deltaYaw)
 	XMStoreFloat3(&leftDirection, newLeftDirection);
 }
 
+void Character::move(XMFLOAT3 offset)
+{
+	GameObject::move(offset);
+}
+
 void Character::update(float deltaTime)
 {
 	XMFLOAT3 newPos = position, oldPos = position;

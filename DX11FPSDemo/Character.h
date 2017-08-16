@@ -23,5 +23,6 @@ public:
 	void moveLeftward() { isMovingLeftward = true; }
 	void moveRightward() { isMovingRightward = true; }
 	void rotate(float deltaYaw);
+	virtual void move(XMFLOAT3 offset) override;
 	virtual void update(float deltaTime) override;
 };

@@ -25,7 +25,7 @@ public:
 	void setPosition(float x, float y, float z);
 	virtual void setRotation(float x, float y, float z);
 	virtual void setScaling(float x, float y, float z);
-	void move(XMFLOAT3 offset);
+	virtual void move(XMFLOAT3 offset);
 	XMFLOAT3 getPosition()const { return position; }
 	XMFLOAT3 getRotation()const { return rotation; }
 	XMFLOAT3 getScaling() const { return scaling; }
