@@ -5,6 +5,8 @@ rotation(0.f, 0.f, 0.f),
 scaling(1.f, 1.f, 1.f),
 transform(1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f),
 parentTransform(1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f),
+animationPivot(0.f,0.f,0.f),
+animationTransform(1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f),
 numberOfIndices(0),
 vertexSize(0)
 {

@@ -40,7 +40,8 @@ weapon(nullptr)
 
 	Cube *leftArm = new Cube(d);
 	leftArm->setScale(0.15f, 0.8f, 0.15f);
-	leftArm->setPosition(-0.7f, 0.4f, 0.f);
+	leftArm->setPosition(-0.7f, 1.2f, 0.f);
+	leftArm->setAnimationPivot(0.f, 0.8f, 0.f);
 	GameObject::addShape(leftArm);
 
 	Cube *rightArm = new Cube(d);
