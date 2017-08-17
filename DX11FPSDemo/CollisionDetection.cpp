@@ -79,12 +79,12 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 		}
 		else if(c2->velocity.x>0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z));
+			float shift = c2->radius - abs(x1 - cylinderCenter.x);
 			offset = XMFLOAT3(-shift, 0.f, 0.f);
 		}
 		else if(c2->velocity.z>0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x));
+			float shift = c2->radius - abs(z1 - cylinderCenter.z);
 			offset = XMFLOAT3(0.f, 0.f, -shift);
 		}
 	}
@@ -109,12 +109,12 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 		}
 		else if (c2->velocity.x>0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z));
+			float shift = c2->radius - abs(x1 - cylinderCenter.x);
 			offset = XMFLOAT3(-shift, 0.f, 0.f);
 		}
 		else if (c2->velocity.z<0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (x1 - cylinderCenter.x)*(x1 - cylinderCenter.x));
+			float shift = c2->radius - abs(z2 - cylinderCenter.z);
 			offset = XMFLOAT3(0.f, 0.f, shift);
 		}
 	}
@@ -139,12 +139,12 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 		}
 		else if (c2->velocity.x<0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (z1 - cylinderCenter.z)*(z1 - cylinderCenter.z));
+			float shift = c2->radius - abs(x2 - cylinderCenter.x);
 			offset = XMFLOAT3(shift, 0.f, 0.f);
 		}
 		else if (c2->velocity.z>0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x));
+			float shift = c2->radius - abs(z1 - cylinderCenter.z);
 			offset = XMFLOAT3(0.f, 0.f, -shift);
 		}
 	}
@@ -169,12 +169,12 @@ XMFLOAT3 CollisionDetection::isOverlappedBetweenCubicAndCylindrical(CubicCollide
 		}
 		else if (c2->velocity.x<0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (z2 - cylinderCenter.z)*(z2 - cylinderCenter.z));
+			float shift = c2->radius - abs(x2 - cylinderCenter.x);
 			offset = XMFLOAT3(shift, 0.f, 0.f);
 		}
 		else if (c2->velocity.z<0)
 		{
-			float shift = sqrt(c2->radius*c2->radius - (x2 - cylinderCenter.x)*(x2 - cylinderCenter.x));
+			float shift = c2->radius - abs(z2 - cylinderCenter.z);
 			offset = XMFLOAT3(0.f, 0.f, shift);
 		}
 	}
