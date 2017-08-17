@@ -33,6 +33,7 @@ DX11FPSDemo::~DX11FPSDemo()
 	delete progressBar;
 	delete enemyCharacterManager;
 	delete mana;
+	delete animationManager;
 	DIKeyboard->Release();
 	DIMouse->Release();
 	delete window;
@@ -120,6 +121,9 @@ bool DX11FPSDemo::initRendering()
 	navigationManager->setMap(currentLevel);
 
 	aiManager = AIManager::getInstance();
+
+	animationManager = AnimationManager::getInstance();
+	animationManager->loadAnimation("walk","walk.txt");
 
 	enemyCharacterManager = EnemyCharacterManager::getInstance();
 	enemyCharacterManager->setDevice(device);

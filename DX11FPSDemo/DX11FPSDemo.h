@@ -15,6 +15,7 @@
 #include "ParticleSystemManager.h"
 #include "ProgressBar.h"
 #include "EnemyCharacterManager.h"
+#include "AnimationManager.h"
 
 class DX11FPSDemo
 {
@@ -48,6 +49,7 @@ private:
 	ProgressBar *progressBar;
 	ProgressBar *mana;
 	EnemyCharacterManager *enemyCharacterManager;
+	AnimationManager *animationManager;
 	int killCount;
 	wstring killCountDisplay;
 	bool mouseLeftClicked;
