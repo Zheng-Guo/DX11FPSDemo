@@ -283,7 +283,7 @@ void DX11FPSDemo::update(float deltaTime)
 	projectileManager->update(deltaTime);
 	aiManager->update(deltaTime);
 	particleSystemManager->update(deltaTime);
-	//animationPlayerManager->update(deltaTime);
+	animationPlayerManager->update(deltaTime);
 	progressBar->setPercentage(playerCharacter->getLifePercentage());
 	enemyCharacterManager->update(deltaTime);
 	mana->setPercentage(playerCharacter->getManaPercentage());

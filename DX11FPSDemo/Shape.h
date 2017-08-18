@@ -50,6 +50,6 @@ public:
 	virtual void setScale(float x, float y, float z);
 	XMFLOAT3 getScale()const { return scaling; }
 	void setParentTransform(XMFLOAT4X4 p) { parentTransform = p; }
-	void setAnimationPivot(float x, float y, float z) { animationPivot = XMFLOAT3(x, y, z); }
+	void setAnimationPivot(float x, float y, float z);
 	void setAnimationTransform(XMFLOAT4X4 t) { animationTransform = t; }
 };
