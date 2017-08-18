@@ -29,6 +29,24 @@ void AnimationPlayer::addSkeleton(Shape * s, string n)
 void AnimationPlayer::update(float deltaTime)
 {
 	accumulatedTime += deltaTime;
+	if(animatedCharacter->isMoving())
+	{
+		if(currentAnimation!="walk")
+		{
+			currentAnimation = "walk";
+			accumulatedTime = 0;
+			currentKeyFrameIndex = 0;
+		}		
+	}
+	else if(!animatedCharacter->getAttacking())
+	{
+		if(currentAnimation!="idle")
+		{
+			currentAnimation = "idle";
+			accumulatedTime = 0;
+			currentKeyFrameIndex = 0;
+		}		
+	}
 	if(currentKeyFrameIndex>=animations[currentAnimation]->getAnimationSequenceLength()-1)
 	{
 		accumulatedTime = 0;

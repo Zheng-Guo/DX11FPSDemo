@@ -47,5 +47,6 @@ public:
 	XMFLOAT3 getForwardDirection() const { return forwardDirection; }
 	XMFLOAT3 getUpDirection() const { return upDirection; }
 	bool isActive()const { return life > 0; }
+	bool getAttacking()const { return isAttacking; }
 	virtual void update(float deltaTime) override;
 };

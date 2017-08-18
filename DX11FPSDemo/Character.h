@@ -23,6 +23,7 @@ public:
 	void moveLeftward() { isMovingLeftward = true; }
 	void moveRightward() { isMovingRightward = true; }
 	void rotate(float deltaYaw);
+	bool isMoving()const { return isMovingForward || isMovingBackward || isMovingLeftward || isMovingRightward; }
 	virtual void move(XMFLOAT3 offset) override;
 	virtual void update(float deltaTime) override;
 };

@@ -32,7 +32,8 @@ weapon(nullptr)
 
 	Cube *eye = new Cube(d);
 	eye->setScale(0.3f, 0.1f, 0.3f);
-	eye->setPosition(0.f, 1.6f, 0.2f);
+	eye->setPosition(0.f, 1.6f, 0.f);
+	eye->setAnimationPivot(0.f, 0.f, -0.2f);
 	GameObject::addShape(eye);
 
 	Cylinder *body = new Cylinder(d);
@@ -67,6 +68,7 @@ weapon(nullptr)
 	animationPlayer = new AnimationPlayer;
 	animationPlayer->setAnimatedCharacter(this);
 	animationPlayer->addAnimation("walk");
+	animationPlayer->addAnimation("idle");
 	animationPlayer->addSkeleton(head, "Head");
 	animationPlayer->addSkeleton(eye, "Eye");
 	animationPlayer->addSkeleton(body, "Body");
