@@ -47,6 +47,11 @@ void Animation::loadAnimation(const char * filename)
 	ifs.close();
 }
 
+int Animation::getAnimationSequenceLength()
+{
+	return animationSequences.begin()->second.size();
+}
+
 vector<KeyFrame*> Animation::getAnimationSequence(string name)
 {
 	return animationSequences[name];

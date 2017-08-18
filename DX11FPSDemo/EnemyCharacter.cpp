@@ -4,6 +4,7 @@
 #include "Cylinder.h"
 #include "Cube.h"
 #include "AIManager.h"
+#include "AnimationPlayerManager.h"
 
 EnemyCharacter::EnemyCharacter(ID3D11Device * d) :Character(d),
 life(3.f),
@@ -20,6 +21,7 @@ weapon(nullptr)
 	aiManager->addController(controller);
 
 	particleSystemManager = ParticleSystemManager::getInstance();
+	AnimationPlayerManager* animationPlayerManager = AnimationPlayerManager::getInstance();
 
 	GameObject::setCollider(new CylindricalCollider(2.f, 2.f));
 
@@ -58,11 +60,18 @@ weapon(nullptr)
 	rightLeg->setScale(0.2f, 0.8f, 0.2f);
 	rightLeg->setPosition(0.3f, -1.2f, 0.f);
 	GameObject::addShape(rightLeg);
+
+	animationPlayer = new AnimationPlayer;
+	animationPlayer->setAnimatedCharacter(this);
+	animationPlayer->addAnimation("walk");
+	animationPlayer->addSkeleton(leftArm, "LeftArm");
+	animationPlayerManager->addAnimationPlayer(animationPlayer);
 }
 
 EnemyCharacter::~EnemyCharacter()
 {
 	controller->setActive(false);
+	animationPlayer->setActive(false);
 	if (weapon)
 	{
 		weapon->setActive(false);

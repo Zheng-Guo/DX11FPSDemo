@@ -20,5 +20,6 @@ public:
 	Animation(){}
 	~Animation();
 	void loadAnimation(const char *filename);
+	int getAnimationSequenceLength();
 	vector<KeyFrame*> getAnimationSequence(string name);
 };

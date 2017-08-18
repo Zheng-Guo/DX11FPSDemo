@@ -34,6 +34,7 @@ DX11FPSDemo::~DX11FPSDemo()
 	delete enemyCharacterManager;
 	delete mana;
 	delete animationManager;
+	delete animationPlayerManager;
 	DIKeyboard->Release();
 	DIMouse->Release();
 	delete window;
@@ -124,6 +125,8 @@ bool DX11FPSDemo::initRendering()
 
 	animationManager = AnimationManager::getInstance();
 	animationManager->loadAnimation("walk","walk.txt");
+
+	animationPlayerManager = AnimationPlayerManager::getInstance();
 
 	enemyCharacterManager = EnemyCharacterManager::getInstance();
 	enemyCharacterManager->setDevice(device);
@@ -280,6 +283,7 @@ void DX11FPSDemo::update(float deltaTime)
 	projectileManager->update(deltaTime);
 	aiManager->update(deltaTime);
 	particleSystemManager->update(deltaTime);
+	//animationPlayerManager->update(deltaTime);
 	progressBar->setPercentage(playerCharacter->getLifePercentage());
 	enemyCharacterManager->update(deltaTime);
 	mana->setPercentage(playerCharacter->getManaPercentage());

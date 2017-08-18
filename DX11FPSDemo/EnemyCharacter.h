@@ -6,6 +6,7 @@
 #include "PlayerCharacter.h"
 
 class AIController;
+class AnimationPlayer;
 
 class EnemyCharacter :public Character
 {
@@ -21,6 +22,7 @@ protected:
 	Material *weaponMaterial;
 	EmittingParticleSystem *weapon;
 	ParticleSystemManager* particleSystemManager;
+	AnimationPlayer* animationPlayer;
 public:
 	EnemyCharacter(ID3D11Device* d);
 	virtual ~EnemyCharacter();
