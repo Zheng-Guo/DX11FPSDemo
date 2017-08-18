@@ -47,6 +47,15 @@ void AnimationPlayer::update(float deltaTime)
 			currentKeyFrameIndex = 0;
 		}		
 	}
+	else if(animatedCharacter->getAttacking())
+	{
+		if(currentAnimation!="attack")
+		{
+			currentAnimation = "attack";
+			accumulatedTime = 0;
+			currentKeyFrameIndex = 0;
+		}
+	}
 	if(currentKeyFrameIndex>=animations[currentAnimation]->getAnimationSequenceLength()-1)
 	{
 		accumulatedTime = 0;

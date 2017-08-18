@@ -126,6 +126,7 @@ bool DX11FPSDemo::initRendering()
 	animationManager = AnimationManager::getInstance();
 	animationManager->loadAnimation("walk","walk.txt");
 	animationManager->loadAnimation("idle", "idle.txt");
+	animationManager->loadAnimation("attack", "attack.txt");
 
 	animationPlayerManager = AnimationPlayerManager::getInstance();
 

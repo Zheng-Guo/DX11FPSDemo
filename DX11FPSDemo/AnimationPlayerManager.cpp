@@ -43,3 +43,10 @@ void AnimationPlayerManager::update(float deltaTime)
 		}
 	}
 }
+
+void AnimationPlayerManager::reset()
+{
+	for (AnimationPlayer* p : animationPlayers)
+		delete p;
+	animationPlayers.clear();
+}

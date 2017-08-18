@@ -69,6 +69,7 @@ weapon(nullptr)
 	animationPlayer->setAnimatedCharacter(this);
 	animationPlayer->addAnimation("walk");
 	animationPlayer->addAnimation("idle");
+	animationPlayer->addAnimation("attack");
 	animationPlayer->addSkeleton(head, "Head");
 	animationPlayer->addSkeleton(eye, "Eye");
 	animationPlayer->addSkeleton(body, "Body");

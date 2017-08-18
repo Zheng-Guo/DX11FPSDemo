@@ -14,4 +14,5 @@ public:
 	static AnimationPlayerManager* getInstance();
 	void addAnimationPlayer(AnimationPlayer* a);
 	void update(float deltaTime);
+	void reset();
 };
