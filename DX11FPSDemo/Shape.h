@@ -15,6 +15,8 @@ protected:
 	XMFLOAT3 scaling;
 	XMFLOAT4X4 transform;
 	XMFLOAT4X4 parentTransform;
+	XMFLOAT3 animationPivot;
+	XMFLOAT4X4 animationTransform;
 	int numberOfIndices;
 	int vertexSize;
 
@@ -48,4 +50,6 @@ public:
 	virtual void setScale(float x, float y, float z);
 	XMFLOAT3 getScale()const { return scaling; }
 	void setParentTransform(XMFLOAT4X4 p) { parentTransform = p; }
+	void setAnimationPivot(float x, float y, float z);
+	void setAnimationTransform(XMFLOAT4X4 t) { animationTransform = t; }
 };

@@ -6,6 +6,7 @@
 #include "PlayerCharacter.h"
 
 class AIController;
+class AnimationPlayer;
 
 class EnemyCharacter :public Character
 {
@@ -21,6 +22,7 @@ protected:
 	Material *weaponMaterial;
 	EmittingParticleSystem *weapon;
 	ParticleSystemManager* particleSystemManager;
+	AnimationPlayer* animationPlayer;
 public:
 	EnemyCharacter(ID3D11Device* d);
 	virtual ~EnemyCharacter();
@@ -45,5 +47,6 @@ public:
 	XMFLOAT3 getForwardDirection() const { return forwardDirection; }
 	XMFLOAT3 getUpDirection() const { return upDirection; }
 	bool isActive()const { return life > 0; }
+	bool getAttacking()const { return isAttacking; }
 	virtual void update(float deltaTime) override;
 };

@@ -4,6 +4,7 @@
 #include "Cylinder.h"
 #include "Cube.h"
 #include "AIManager.h"
+#include "AnimationPlayerManager.h"
 
 EnemyCharacter::EnemyCharacter(ID3D11Device * d) :Character(d),
 life(3.f),
@@ -20,6 +21,7 @@ weapon(nullptr)
 	aiManager->addController(controller);
 
 	particleSystemManager = ParticleSystemManager::getInstance();
+	AnimationPlayerManager* animationPlayerManager = AnimationPlayerManager::getInstance();
 
 	GameObject::setCollider(new CylindricalCollider(2.f, 2.f));
 
@@ -30,7 +32,8 @@ weapon(nullptr)
 
 	Cube *eye = new Cube(d);
 	eye->setScale(0.3f, 0.1f, 0.3f);
-	eye->setPosition(0.f, 1.6f, 0.2f);
+	eye->setPosition(0.f, 1.6f, 0.f);
+	eye->setAnimationPivot(0.f, 0.f, -0.2f);
 	GameObject::addShape(eye);
 
 	Cylinder *body = new Cylinder(d);
@@ -40,28 +43,47 @@ weapon(nullptr)
 
 	Cube *leftArm = new Cube(d);
 	leftArm->setScale(0.15f, 0.8f, 0.15f);
-	leftArm->setPosition(-0.7f, 0.4f, 0.f);
+	leftArm->setPosition(-0.7f, 1.2f, 0.f);
+	leftArm->setAnimationPivot(0.f, 0.8f, 0.f);
 	GameObject::addShape(leftArm);
 
 	Cube *rightArm = new Cube(d);
 	rightArm->setScale(0.15f, 0.8f, 0.15f);
-	rightArm->setPosition(0.7f, 0.4f, 0.f);
+	rightArm->setPosition(0.7f, 1.2f, 0.f);
+	rightArm->setAnimationPivot(0.f, 0.8f, 0.f);
 	GameObject::addShape(rightArm);
 
 	Cube *leftLeg = new Cube(d);
 	leftLeg->setScale(0.2f, 0.8f, 0.2f);
-	leftLeg->setPosition(-0.3f, -1.2f, 0.f);
+	leftLeg->setPosition(-0.3f, -0.4f, 0.f);
+	leftLeg->setAnimationPivot(0.f, 0.8f, 0.f);
 	GameObject::addShape(leftLeg);
 
 	Cube *rightLeg = new Cube(d);
 	rightLeg->setScale(0.2f, 0.8f, 0.2f);
-	rightLeg->setPosition(0.3f, -1.2f, 0.f);
+	rightLeg->setPosition(0.3f, -0.4f, 0.f);
+	rightLeg->setAnimationPivot(0.f, 0.8f, 0.f);
 	GameObject::addShape(rightLeg);
+
+	animationPlayer = new AnimationPlayer;
+	animationPlayer->setAnimatedCharacter(this);
+	animationPlayer->addAnimation("walk");
+	animationPlayer->addAnimation("idle");
+	animationPlayer->addAnimation("attack");
+	animationPlayer->addSkeleton(head, "Head");
+	animationPlayer->addSkeleton(eye, "Eye");
+	animationPlayer->addSkeleton(body, "Body");
+	animationPlayer->addSkeleton(leftArm, "LeftArm");
+	animationPlayer->addSkeleton(rightArm, "RightArm");
+	animationPlayer->addSkeleton(leftLeg, "LeftLeg");
+	animationPlayer->addSkeleton(rightLeg, "RightLeg");
+	animationPlayerManager->addAnimationPlayer(animationPlayer);
 }
 
 EnemyCharacter::~EnemyCharacter()
 {
 	controller->setActive(false);
+	animationPlayer->setActive(false);
 	if (weapon)
 	{
 		weapon->setActive(false);
