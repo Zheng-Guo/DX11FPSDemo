@@ -92,8 +92,6 @@ void Cube::draw(ID3D11DeviceContext * deviceContext, CXMMATRIX camView, CXMMATRI
 	deviceContext->PSSetShader(material->getPixelShader(), nullptr, 0);
 	deviceContext->PSSetShaderResources(0, 1, &CubesTexture);
 	deviceContext->PSSetSamplers(0, 1, &CubesTexSamplerState);
-	//XMMATRIX world = XMLoadFloat4x4(&transform)*XMMatrixTranslation(-animationPivot.x,-animationPivot.y,-animationPivot.z)*XMLoadFloat4x4(&animationTransform)*XMLoadFloat4x4(&parentTransform);
-	//XMMATRIX world = XMLoadFloat4x4(&transform)*XMLoadFloat4x4(&animationTransform)*XMLoadFloat4x4(&parentTransform);
 	XMMATRIX world = XMMatrixScaling(scaling.x, scaling.y, scaling.z)*XMMatrixRotationX(rotation.x)*XMMatrixRotationY(rotation.y)*XMMatrixRotationZ(rotation.z)*XMMatrixTranslation(-animationPivot.x, -animationPivot.y, -animationPivot.z)*XMLoadFloat4x4(&animationTransform)*XMMatrixTranslation(position.x, position.y, position.z)*XMLoadFloat4x4(&parentTransform);
 	XMMATRIX wvp = world*camView*camProjection;
 
